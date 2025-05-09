@@ -6,6 +6,12 @@ enum Side {
   SELL = 1;
 }
 
+import "google/protobuf/empty.proto";
+
+service TraderService {
+  rpc SendOrder(OrderRequest) returns (google.protobuf.Empty);
+}
+
 message BuyOrSellOrder {
   string org_id = 1;
   string ticker = 2;

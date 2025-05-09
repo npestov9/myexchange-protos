@@ -1,0 +1,35 @@
+syntax = "proto3";
+package trader; // just a namespace – can be anything (e.g. your firm, project)
+
+enum Side {
+  BUY = 0;
+  SELL = 1;
+}
+
+message BuyOrSellOrder {
+  string org_id = 1;
+  string ticker = 2;
+  double price = 3;
+  int32 quantity = 4;
+  Side side = 5;
+}
+
+message AmendPriceOrder {
+  string org_id = 1;
+  double new_price = 2;
+  int32 quantity = 3;
+}
+
+message CancelOrder {
+  string org_id = 1;
+  int32 quantity = 2;
+}
+
+message OrderRequest {
+  oneof order_type {
+    BuyOrSellOrder new_order = 1;
+    AmendPriceOrder amend = 2;
+    CancelOrder cancel = 3;
+  }
+}
+
